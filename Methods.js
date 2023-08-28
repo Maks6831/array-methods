@@ -1,10 +1,39 @@
 const fruits = ["apple", "banana", "orange", "grape"];
+const testFunction = (element) => {
+    if(typeof element === "string"){
+        return true
+    } else {
+        return false
+    }
+}
+
+const filterFunctionOne = (element) => {
+    if(typeof element === "string"){
+        return true
+    } else {
+        return false
+    }
+
+}
+
+const filterFunctionTwo = (element) => {
+    if(element < 4){
+        return true
+    } else {
+        return false
+    }
+}
+
+const findFunction = (element) => {
+    return element > 20;
+}
+
 
 const methodObject = {
     fruits : ["apple", "banana", "orange", "grape"],
     numbers : ["1","2","3","4","5","6","7"],
     letters : ["a","b","c","d","e","f","g"],
-    realNumbers : [1,2,3,4,5,6,7,8,9,10],
+    realNumbers : [1,2,3,4,5,6,7,8,9,10, 25],
     mixedArray : ["1","2","3",6,7,8,9,"banana", "orange", "grape"],
     emptyArray : [],
     newAt : function(index){
@@ -55,16 +84,34 @@ const methodObject = {
         }
         return array;
 
+    },
+    newFilter: function(funct, array){
+        let newArr = []
+        for(let i = 0; i < array.length; i++){
+            if (array[i] && funct(array[i]) === true){
+                newArr.push(array[i])
+
+            }
+        }
+        if(newArr !== []){
+            return newArr
+        } else {
+            return null
+        }
+    },
+    newFind: function(funct, array){
+        for(let i = 0; i < array.length; i++){
+            if(funct(array[i])){     
+            return array[i]   
+            }
+        }
+
+        return null
+
     }
 }
 
-const testFunction = (element) => {
-    if(typeof element === "string"){
-        return true
-    } else {
-        return false
-    }
-}
+
 
 
 
@@ -88,7 +135,16 @@ const testFunction = (element) => {
 
 // fill 
 
+//console.log(methodObject.newFill(methodObject.realNumbers, 3));// passed
 
-console.log(methodObject.newFill(methodObject.realNumbers, 3));
+// filter
 
+//console.log(methodObject.newFilter(filterFunctionOne, methodObject.mixedArray)); // returns [ '1', '2', '3', 'banana', 'orange', 'grape' ]
+//console.log(methodObject.newFilter(filterFunctionTwo, methodObject.realNumbers));// returns [ 1, 2, 3 ]
+//console.log(methodObject.newFilter(filterFunctionTwo, methodObject.emptyArray));// returns empty array which i think is fine. 
+
+// find
+
+//console.log(methodObject.newFind(filterFunctionTwo, methodObject.realNumbers));// returns 1
+console.log(methodObject.newFind(findFunction, methodObject.realNumbers));// returns 25
 
