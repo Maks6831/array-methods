@@ -42,6 +42,28 @@ const methodObject = {
     mixedArray : ["1","2","3",6,7,8,9,"banana", "orange", "grape"],
     subArrayOne: [[1,2],[3,4],[5,6]],
     subArrayTwo: [1, 2, [3, [4, 5, 6], 7], 8],
+    subArrayTwo : [
+        [
+          [
+            [[1, 2], [3, 4], [5, 6]],
+            [[7, 8], [9, 10], [11, 12]],
+          ],
+          [
+            [[13, 14], [15, 16], [17, 18]],
+            [[19, 20], [21, 22], [23, 24]],
+          ],
+        ],
+        [
+          [
+            [[25, 26], [27, 28], [29, 30]],
+            [[31, 32], [33, 34], [35, 36]],
+          ],
+          [
+            [[37, 38], [39, 40], [41, 42]],
+            [[43, 44], [45, 46], [47, 48]],
+          ],
+        ],
+      ],
     emptyArray : [],
     newAt : function(index){
         return this.fruits[index]
@@ -180,7 +202,7 @@ const methodObject = {
     newForEach : function (funct, array){
         let count =0 
         while(count < array.length ){
-            return funct(array[count])
+             funct(array[count])
             count++
         }
     }
@@ -244,7 +266,7 @@ const methodObject = {
 
 //console.log(methodObject.newFlat( methodObject.subArrayOne)) // outputs [ 1, 2, 3, 4, 5, 6 ]
 //console.log(methodObject.newFlat( methodObject.subArrayTwo)) // outputs [  1, 2, 3, 4, 5, 6, 7, 8 ]
-
+//console.log(methodObject.newFlat( methodObject.subArrayThree))
 
 // flatMap
 
@@ -254,4 +276,87 @@ const methodObject = {
 // forEach 
 
 
-console.log(methodObject.newForEach((x) => x * 2 , methodObject.realNumbers))
+//console.log(methodObject.newForEach((x) => x * 2 , methodObject.realNumbers))
+
+// i am now going to do the rest of the methods using the way described in developer pro 
+
+const fruit = ["apple", "banana", "orange", "grape", "banana", "orange"]
+const numbers = ["1", "2", "3", "4", "5", "6", "7"]
+const letters = ["a", "b", "c", "d", "e", "f", "g"]
+const realNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 25, 3]
+const mixedArray = ["1", "2", "3", 6, 7, 8, 9, "banana", "orange", "grape"]
+const subArrayOne = [[1, 2], [3, 4], [5, 6]]
+const subArrayTwo = [1, 2, [3, [4, 5, 6], 7], 8]
+const emptyArray = []
+
+
+// includes
+
+Array.prototype.includes = undefined
+
+
+Array.prototype.includes = function(element){
+    let truth = false;
+    for(let i = 0; i < this.length; i++){
+        if(this[i] === element){
+            truth = true;
+        }     
+    }
+    return truth
+}
+
+//console.log(realNumbers.includes(350));
+
+// indexOf
+Array.prototype.indexOf = undefined;
+
+Array.prototype.indexOf = function(element, start) {
+    let index = -1;
+    let beginning
+    start ? beginning = start: beginning = 0
+    for(let i = beginning; i < this.length; i++){
+        if(this[i] === element){
+            index = i
+        }
+    }
+    return index;
+}
+
+//console.log(realNumbers.indexOf(3, 3));
+
+// join
+
+Array.prototype.join = undefined;
+
+Array.prototype.join = function(seperator=','){
+    let string = ''
+    for(let i = 0; i < this.length; i++){
+        if(i < this.length-1){
+            string += `${this[i]}${seperator}`
+              } else {
+                string += `${this[i]}`
+            }
+        }
+        return string
+        
+        
+    }
+    
+
+
+//console.log(fruit.join('-'));
+
+// lastIndexOf
+Array.prototype.lastIndexOf = undefined;
+
+Array.prototype.lastIndexOf = function(element){
+    for(let i = this.length-1; i > -1; i--){
+        if(this[i] === element){
+            return i;
+        }
+    }
+
+
+}
+
+//console.log(fruit.lastIndexOf("apple"));
