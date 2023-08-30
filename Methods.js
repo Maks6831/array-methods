@@ -495,3 +495,28 @@ Array.prototype.splice = function(index, howmany, ...theArgs){
     return newArr.flat();
 
 }
+
+Array.prototype.toString = undefined;
+
+Array.prototype.toString = function(){
+    let string = '';
+    for(let i = 0; i < this.length; i++){
+        string += this[i]
+    }
+    return string;
+}
+
+console.log(realNumbers.toString());
+
+Array.prototype.unshift = undefined;
+
+Array.prototype.unshift = function(...theArgs){
+    let newArr = theArgs;
+    for(let i = 0; i < this.length; i++){
+        newArr.push(this[i]);
+    }
+
+    return newArr;
+}
+
+console.log(realNumbers.unshift(4,5,6))
