@@ -360,3 +360,138 @@ Array.prototype.lastIndexOf = function(element){
 }
 
 //console.log(fruit.lastIndexOf("apple"));
+
+// pop
+
+Array.prototype.pop = undefined;
+
+Array.prototype.pop = function(){
+    if(this === []){
+        return undefined;
+    } else { 
+        const last = this[this.length-1];
+        this.splice(this.length-1, 1);
+        return last
+    }
+    
+}
+
+//console.log(fruit.pop());
+//console.log(fruit);
+
+// push
+
+
+Array.prototype.push = undefined;
+
+Array.prototype.push = function(element){
+    this[this.length] = element;
+}
+
+//fruit.push('hello');
+
+// reduce
+
+Array.prototype.reduce = undefined;
+
+Array.prototype.reduce = function(cb, initialvalue){
+    let initial = initialvalue;
+    for(let i = 0; i < this.length; i++){
+        total = cb(initial, this[i]);
+        console.log(total);
+        initial = total
+    } 
+    return initial;
+
+
+}
+
+
+//console.log(realNumbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+
+// reverse 
+
+Array.prototype.reverse = undefined;
+
+Array.prototype.reverse = function(){
+    let newArr = [];
+    for(let i = this.length-1; i > -1; i--){
+        newArr.push(this[i]);
+    }
+    return newArr;
+}
+
+//console.log(fruit.reverse());
+//console.log(fruit)
+
+// shift
+
+Array.prototype.shift = undefined;
+
+
+Array.prototype.shift = function(){
+    let newArr = [];
+    for(let i = 0; i < this.length; i++){ 
+        if(this[i+1]){
+            newArr.push(this[i+1])            
+        }
+    }
+    return newArr;
+}
+
+//console.log(fruit.shift());
+//console.log(fruit);
+
+// slice
+
+Array.prototype.slice = undefined;
+
+Array.prototype.slice = function(start, end){
+    let newArr = []
+    end ? ending = end: ending = this.length;
+    for(let i = start; i < ending; i++){
+        newArr.push(this[i]);
+    }
+    return newArr;
+}
+
+//console.log(fruit.slice(2, 4));
+
+// some 
+
+Array.prototype.some = undefined;
+
+Array.prototype.some = function(cb){
+    let truth = false
+    for(let i = 0; i < this.length; i++){
+        if(cb(this[i])){
+            truth = true;
+        }
+    }
+    return truth;
+}
+
+//console.log(realNumbers.some((element)=> element % 2 === 0))
+
+// splice 
+
+Array.prototype.splice = undefined; 
+
+Array.prototype.splice = function(index, howmany, ...theArgs){
+    let newArr = []
+    for(let i = 0; i< this.length; i++){
+        if(index === i && theArgs){
+            newArr.push(theArgs);
+            newArr.push(this[i])   
+        } else {
+            newArr.push(this[i])
+        }
+    }
+    if(howmany>0){
+        newArr = newArr.slice(0, index+1).concat(newArr.slice(index+howmany+1))
+
+
+    }
+    return newArr.flat();
+
+}
