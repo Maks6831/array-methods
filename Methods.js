@@ -1,286 +1,6 @@
-const fruits = ["apple", "banana", "orange", "grape"];
-const testFunction = (element) => {
-    if(typeof element === "string"){
-        return true
-    } else {
-        return false
-    }
-}
-
-const filterFunctionOne = (element) => {
-    if(typeof element === "string"){
-        return true
-    } else {
-        return false
-    }
-
-}
-
-const filterFunctionTwo = (element) => {
-    if(element < 4){
-        return true
-    } else {
-        return false
-    }
-}
-
-const findFunction = (element) => {
-    return element > 20;
-}
-
-const findFunctionTwo = (element) => {
-    return element > 100;
-}
 
 
-
-const methodObject = {
-    fruits : ["apple", "banana", "orange", "grape"],
-    numbers : ["1","2","3","4","5","6","7"],
-    letters : ["a","b","c","d","e","f","g"],
-    realNumbers : [1,2,3,4,5,6,7,8,9,10, 25, 30],
-    mixedArray : ["1","2","3",6,7,8,9,"banana", "orange", "grape"],
-    subArrayOne: [[1,2],[3,4],[5,6]],
-    subArrayTwo: [1, 2, [3, [4, 5, 6], 7], 8],
-    subArrayTwo : [
-        [
-          [
-            [[1, 2], [3, 4], [5, 6]],
-            [[7, 8], [9, 10], [11, 12]],
-          ],
-          [
-            [[13, 14], [15, 16], [17, 18]],
-            [[19, 20], [21, 22], [23, 24]],
-          ],
-        ],
-        [
-          [
-            [[25, 26], [27, 28], [29, 30]],
-            [[31, 32], [33, 34], [35, 36]],
-          ],
-          [
-            [[37, 38], [39, 40], [41, 42]],
-            [[43, 44], [45, 46], [47, 48]],
-          ],
-        ],
-      ],
-    emptyArray : [],
-    newAt : function(index){
-        return this.fruits[index]
-    },
-    newConcat : function(){
-        const newArr = this.fruits
-        //console.log(arguments)
-        for (let array in arguments){
-            let currentArr = arguments[array]
-            for(let i=0; i < currentArr.length; i++){
-                if (currentArr[i])
-                newArr.push(currentArr[i])
-            }
-        }
-        
-     return newArr;     
-
-    },
-    newEvery : function(funct, array){
-        const truthArray = [];
-        for(let i = 0; i < array.length; i++){
-            if(array[i]){
-                truthArray.push(funct(array[i]));
-            }           
-        }
-        if(truthArray.includes(false) || truthArray === []){
-            return false;
-        } else {
-            return true;
-        }
-
-    },
-    newFill : function(array, fill, start, end, ){
-        if(start && end){
-            for(let i = array[start]; i < array[end]; i++){
-                array[i] = fill
-            }  
-        } else if(start) {
-            for(let i = array[start]; i < array.length; i++){
-                array[i] = fill
-            }
-
-        } else {
-            for(let i = 0; i < array.length; i++){
-                array[i] = fill
-            }
-        }
-        return array;
-
-    },
-    newFilter: function(funct, array){
-        let newArr = []
-        for(let i = 0; i < array.length; i++){
-            if (array[i] && funct(array[i]) === true){
-                newArr.push(array[i])
-
-            }
-        }
-        if(newArr !== []){
-            return newArr
-        } else {
-            return null
-        }
-    },
-    newFind: function(funct, array){
-        for(let i = 0; i < array.length; i++){
-            if(funct(array[i])){     
-            return array[i]   
-            }
-        }
-
-        return null
-
-    },
-    newFindIndex : function(funct, array){
-        let counter = 0
-        for(let i = 0; i < array.length; i++){
-            if(funct(array[i])){   
-                counter++
-                return i;   
-            }
-            
-        }
-        if(!counter){
-            return -1;
-        }
-      
-    },
-    newFindLast : function(funct, array){
-        lastNumber = 0;
-        for(let i = 0; i < array.length; i++){
-            if(funct(array[i])){   
-                lastNumber = array[i];  
-            }
-        
-    }
-    return lastNumber;
-    },
-    newFindLastIndex : function(funct, array){
-        let lastIndex = 0
-        for(let i = 0; i < array.length; i++){
-            if(funct(array[i])){   
-                lastIndex = i;  
-            }     
-    }
-    return lastIndex
-    },
-    newFlat: function(array){
-        newArr = [];
-        for(let i = 0; i < array.length; i++){
-            if(Array.isArray(array[i])){
-                for(let j = 0; j < array[i].length; j++){
-                    if(Array.isArray(array[i][j])){
-                        for(let k = 0; k < array[i][j].length; k++){
-                            newArr.push(array[i][j][k])
-                        }
-                        
-                    } else {
-                        newArr.push(array[i][j])
-                    }               
-                } 
-            } else {
-                newArr.push(array[i])
-            }
-        }
-        return newArr;
-    },
-    newFlatMap: function(funct, array){
-        let newArr = [];
-        for(let i = 0; i < array.length; i++){
-            newArr.push(funct(array[i]))
-        }
-
-        return newArr;
-    },
-    newForEach : function (funct, array){
-        let count =0 
-        while(count < array.length ){
-             funct(array[count])
-            count++
-        }
-    }
-
-}
-
-
-
-
-
-// tests
-
-//newAt
-
-//console.log(methodObject.newAt(1)); // 
-
-// newConcat
-
-//console.log(methodObject.newConcat(methodObject.letters));
-//console.log(methodObject.newConcat(methodObject.letters, methodObject.numbers));
-
-// newEvery
-
-//console.log(methodObject.newEvery(testFunction, methodObject.mixedArray)); //returns false
-//console.log(methodObject.newEvery(testFunction, methodObject.realNumbers)); // returns false
-//console.log(methodObject.newEvery(testFunction, methodObject.numbers)) // return true;
-//console.log(methodObject.newEvery(testFunction, methodObject.emptyArray)); // returns true
-
-// fill 
-
-//console.log(methodObject.newFill(methodObject.realNumbers, 3));// passed
-
-// filter
-
-//console.log(methodObject.newFilter(filterFunctionOne, methodObject.mixedArray)); // returns [ '1', '2', '3', 'banana', 'orange', 'grape' ]
-//console.log(methodObject.newFilter(filterFunctionTwo, methodObject.realNumbers));// returns [ 1, 2, 3 ]
-//console.log(methodObject.newFilter(filterFunctionTwo, methodObject.emptyArray));// returns empty array which i think is fine. 
-
-// find
-
-//console.log(methodObject.newFind(filterFunctionTwo, methodObject.realNumbers));// returns 1
-//console.log(methodObject.newFind(findFunction, methodObject.realNumbers));// returns 25
-
-
-// findIndex
-
-//console.log(methodObject.newFindIndex(findFunction, methodObject.realNumbers)) // outputs 10
-//console.log(methodObject.newFindIndex(findFunctionTwo, methodObject.realNumbers)) // outputs -1
-
-
-// findLast
-
-//console.log(methodObject.newFindLast(findFunction, methodObject.realNumbers)) // outputs 30
-
-// findLastIndex
-
-//console.log(methodObject.newFindLastIndex(findFunction, methodObject.realNumbers)) // outputs 11
-
-
-// flat
-
-//console.log(methodObject.newFlat( methodObject.subArrayOne)) // outputs [ 1, 2, 3, 4, 5, 6 ]
-//console.log(methodObject.newFlat( methodObject.subArrayTwo)) // outputs [  1, 2, 3, 4, 5, 6, 7, 8 ]
-//console.log(methodObject.newFlat( methodObject.subArrayThree))
-
-// flatMap
-
-//console.log(methodObject.newFlatMap((x) => x * 2 , methodObject.realNumbers)) // outputs [2,  4,  6,  8, 10, 12, 14, 16, 18, 20,50, 60]
-
-
-// forEach 
-
-
-//console.log(methodObject.newForEach((x) => x * 2 , methodObject.realNumbers))
-
-// i am now going to do the rest of the methods using the way described in developer pro 
-
-const fruit = ["apple", "banana", "orange", "grape", "banana", "orange"]
+const fruit = ["apple", "banana1", "orange1", "grape", "banana2", "orange2"]
 const numbers = ["1", "2", "3", "4", "5", "6", "7"]
 const letters = ["a", "b", "c", "d", "e", "f", "g"]
 const realNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 25, 3]
@@ -288,6 +8,23 @@ const mixedArray = ["1", "2", "3", 6, 7, 8, 9, "banana", "orange", "grape"]
 const subArrayOne = [[1, 2], [3, 4], [5, 6]]
 const subArrayTwo = [1, 2, [3, [4, 5, 6], 7], 8]
 const emptyArray = []
+
+
+Array.prototype.at = undefined;
+
+Array.prototype.at = function(index){
+    if(index < 0){
+        return this[index + this.length]
+    } else if(!index){
+        return this[0]
+    } else return this[index];
+    
+}
+
+//console.log(fruit.at(2)) // orange;
+//console.log(fruit.at()) // apple;
+//console.log(fruit.at(-1)) // banana?
+
 
 
 // includes
@@ -375,20 +112,35 @@ Array.prototype.pop = function(){
     }
     
 }
+const plants = ['broccoli', 'cauliflower', 'cabbage', 'kale', 'tomato'];
 
-//console.log(fruit.pop());
-//console.log(fruit);
+//console.log(plants.pop());
+//
+////console.log(fruit.pop());
+////console.log(fruit);
+//console.log(plants);
+//// Expected output: Array ["broccoli", "cauliflower", "cabbage", "kale"]
+//
+//plants.pop();
+//
+//console.log(plants);
+// Expected output: Array ["broccoli", "cauliflower", "cabbage"]
+
 
 // push
 
 
-Array.prototype.push = undefined;
+ Array.prototype.push = undefined
 
-Array.prototype.push = function(element){
-    this[this.length] = element;
-}
+ Array.prototype.push = function(...elements){
+    for(let i = 0; i< elements.length; i++){
+        this[this.length] = elements[i];
+    }
+    
+ }
 
-//fruit.push('hello');
+//fruit.push('hello', 'hey');
+//console.log(fruit);
 
 // reduce
 
@@ -397,8 +149,8 @@ Array.prototype.reduce = undefined;
 Array.prototype.reduce = function(cb, initialvalue){
     let initial = initialvalue;
     for(let i = 0; i < this.length; i++){
-        total = cb(initial, this[i]);
-        console.log(total);
+        let total = cb(initial, this[i]);
+        
         initial = total
     } 
     return initial;
@@ -406,8 +158,16 @@ Array.prototype.reduce = function(cb, initialvalue){
 
 }
 
+const array1 = [1, 2, 3, 4];
 
-//console.log(realNumbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+// 0 + 1 + 2 + 3 + 4
+const initialValue = 0;
+const sumWithInitial = array1.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue);
+
+//console.log(sumWithInitial);
+// Expected output: 10
+
+
 
 // reverse 
 
@@ -418,7 +178,11 @@ Array.prototype.reverse = function(){
     for(let i = this.length-1; i > -1; i--){
         newArr.push(this[i]);
     }
-    return newArr;
+    this.length = 0;
+
+    this.push(...newArr)
+    //return this;
+    return this
 }
 
 //console.log(fruit.reverse());
@@ -431,25 +195,51 @@ Array.prototype.shift = undefined;
 
 Array.prototype.shift = function(){
     let newArr = [];
+    let firstElement = this[0];
     for(let i = 0; i < this.length; i++){ 
         if(this[i+1]){
-            newArr.push(this[i+1])            
+            newArr.push(this[i+1])  
+                      
         }
     }
-    return newArr;
+    this.length = 0;
+    this.push(...newArr);
+    return firstElement;
 }
+
+
 
 //console.log(fruit.shift());
 //console.log(fruit);
+
+//const array11 = [1, 2, 3];
+//
+//const firstElement = array11.shift();
+//
+//console.log(array11);
+//// Expected output: Array [2, 3]
+//
+//console.log(firstElement);
+// Expected output: 1
+
 
 // slice
 
 Array.prototype.slice = undefined;
 
-Array.prototype.slice = function(start, end){
+Array.prototype.slice = function(start=0,end=this.length){
     let newArr = []
-    end ? ending = end: ending = this.length;
-    for(let i = start; i < ending; i++){
+    if(start < 0){
+        start = start + this.length;
+    } else if(start < -this.length){
+        start === 0;
+    }
+    if(end < 0){
+        end = end + this.length;
+    } else if(end < -this.length || end > this.length){
+        end === this.length;
+    }
+    for(let i = start; i < end; i++){
         newArr.push(this[i]);
     }
     return newArr;
@@ -458,6 +248,27 @@ Array.prototype.slice = function(start, end){
 //console.log(fruit.slice(2, 4));
 
 // some 
+
+const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+
+//console.log(animals.slice(2));
+//// Expected output: Array ["camel", "duck", "elephant"]
+//
+//console.log(animals.slice(2, 4));
+//// Expected output: Array ["camel", "duck"]
+//
+//console.log(animals.slice(1, 5));
+//// Expected output: Array ["bison", "camel", "duck", "elephant"]
+//
+//console.log(animals.slice(-2));
+//// Expected output: Array ["duck", "elephant"]
+//
+//console.log(animals.slice(2, -1));
+//// Expected output: Array ["camel", "duck"]
+//
+//console.log(animals.slice());
+//// Expected output: Array ["ant", "bison", "camel", "duck", "elephant"]
+
 
 Array.prototype.some = undefined;
 
@@ -471,6 +282,15 @@ Array.prototype.some = function(cb){
     return truth;
 }
 
+//const array = [1, 2, 3, 4, 5];
+//
+//// Checks whether an element is even
+//const even = (element) => element % 2 === 0;
+//
+//console.log(array.some(even));
+// Expected output: true
+
+
 //console.log(realNumbers.some((element)=> element % 2 === 0))
 
 // splice 
@@ -478,23 +298,23 @@ Array.prototype.some = function(cb){
 Array.prototype.splice = undefined; 
 
 Array.prototype.splice = function(index, howmany, ...theArgs){
-    let newArr = []
-    for(let i = 0; i< this.length; i++){
-        if(index === i && theArgs){
-            newArr.push(theArgs);
-            newArr.push(this[i])   
-        } else {
-            newArr.push(this[i])
-        }
-    }
-    if(howmany>0){
-        newArr = newArr.slice(0, index+1).concat(newArr.slice(index+howmany+1))
-
-
-    }
-    return newArr.flat();
-
+    const beggining = this.slice(0, index)
+    const ending = this.slice(index+howmany, this.length);
+    this.length = 0;
+    this.push(...beggining, ...theArgs, ...ending);
 }
+
+//const months = ['Jan', 'March', 'April', 'June'];
+//months.splice(1, 0, 'Feb');
+//// Inserts at index 1
+//console.log(months);
+//// Expected output: Array ["Jan", "Feb", "March", "April", "June"]
+//
+//months.splice(4, 1, 'May');
+//// Replaces 1 element at index 4
+//console.log(months);
+// Expected output: Array ["Jan", "Feb", "March", "April", "May"]
+
 
 Array.prototype.toString = undefined;
 
@@ -506,7 +326,13 @@ Array.prototype.toString = function(){
     return string;
 }
 
-console.log(realNumbers.toString());
+const arrayString = [1, 2, 'a', '1a'];
+
+console.log(arrayString.toString());
+// Expected output: "1,2,a,1a"
+
+
+//console.log(realNumbers.toString());
 
 Array.prototype.unshift = undefined;
 
@@ -515,8 +341,19 @@ Array.prototype.unshift = function(...theArgs){
     for(let i = 0; i < this.length; i++){
         newArr.push(this[i]);
     }
+    this.length = 0;
+    this.push(...newArr);
 
-    return newArr;
+    return this.length;
 }
 
-console.log(realNumbers.unshift(4,5,6))
+//console.log(realNumbers.unshift(4,5,6))
+
+//const arrayUnshift = [1, 2, 3];
+//
+//console.log(arrayUnshift.unshift(4, 5));
+//// Expected output: 5
+//
+//console.log(arrayUnshift);
+//// Expected output: Array [4, 5, 1, 2, 3]
+
