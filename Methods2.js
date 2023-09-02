@@ -114,7 +114,7 @@ Array.prototype.findLastIndex = function(cb){
     for(let i = 0; i < this.length; i++){
         if(cb(this[i])){
             lastIndex = i;
-                }
+        }
     }
     return lastIndex;
 }
@@ -138,7 +138,7 @@ Array.prototype.findLast = function(cb){
     for(let i = 0; i < this.length; i++){
         if(cb(this[i])){
             last = this[i];
-                }
+        }
     }
     return last;
 }
@@ -158,7 +158,7 @@ Array.prototype.findIndex = function(cb){
     for(let i = 0; i < this.length; i++){
         if(cb(this[i])){
             return i;
-                }
+        }
     }
     return firstIndex;
 }
@@ -178,7 +178,7 @@ Array.prototype.find = function(cb){
     for(let i = 0; i < this.length; i++){
         if(cb(this[i])){
             return this[i];
-                }
+        }
     }
     return firstIndex;
 }
@@ -249,8 +249,9 @@ Array.prototype.every = function(cb){
         if(!cb(this[i])){
             truth = false;
         }
-        return truth;
+        
     }
+    return truth;
 
 
 }
@@ -266,20 +267,22 @@ Array.prototype.every = function(cb){
 
 Array.prototype.concat = undefined;
 
-Array.prototype.concat = function(array){;
+Array.prototype.concat = function(){;
     let newArr = [];
     newArr.push(...this);
-    newArr.push(...array);
-    return newArr;
+    for(let i = 0; i < arguments.length; i++){
+        newArr.push(arguments[i]);
+    }
+    return newArr.flat();
 }
 
-//const resultFour = realNumbers.concat(fruit);
-//console.log(resultFour);
+//const resultFour = resalNumbers.concat(fruit);
 
-//const array123 = ['a', 'b', 'c'];
-//const array2 = ['d', 'e', 'f'];
-//const array3 = array123.concat(array2);
-//
-//console.log(array3);
-// Expected output: Array ["a", "b", "c", "d", "e", "f"]
+const array123 = ['a', 'b', 'c'];
+const array2 = ['d', 'e', 'f'];
+const array4 = ['Hello', 'hey', 'howdy']
+const array3 = array123.concat(array2, array4);
+
+console.log(array3);
+ //Expected output: Array ["a", "b", "c", "d", "e", "f"]
 
